@@ -1,7 +1,7 @@
 // Client HTTP terpusat. Semua panggilan API lewat sini biar konsisten:
 // base URL, header, token auth, dan penanganan error.
 const BASE_URL =
-  import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8000/api/v1'
+  import.meta.env.VITE_API_URL ?? ''
 
 type ApiOptions = Omit<RequestInit, 'body'> & { body?: unknown }
 
