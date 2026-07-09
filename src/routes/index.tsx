@@ -43,14 +43,14 @@ function Index() {
             boy<span className="text-surf">Code</span>.
           </h1>
           <p className="mt-5 max-w-xl text-lg text-mist">
-          Bug boleh datang tiap hari. Yang nggak boleh hilang cuma semangat buat belajar lagi.
+          Dokumentasi pembelajaran gue, lu bisa belajar di sini kalau merasa butuh. Selain itu juga ada project coba-coba. Cobain deh!
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/materials">
-              <Button className="min-w-40">Gas Ngulik</Button>
+              <Button className="min-w-40">Penting</Button>
             </Link>
             <Link to="/about">
-              <Button variant="secondary">Kenalan dulu</Button>
+              <Button variant="secondary">Ga penting</Button>
             </Link>
           </div>
         </div>
