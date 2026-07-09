@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 
-/* Design tokens — tema laut "paissPaus".
-   pais = kamu, Paus = perenang kuat di laut luas.
-   Palet: biru laut dalam (surface) + cyan (aksi) + amber (sorotan hangat). */
+/* Design tokens — tema "boyCode": langit malam + tech stack.
+   Anak sederhana (sandal jepit, kaus kutang) tapi jenius, ngoding di bawah bintang.
+   Palet: navy langit malam (surface) + cyan (aksi) + amber (sorotan hangat). */
 @theme {
   --color-abyss: #04121c; /* laut terdalam — background halaman */
   --color-deep: #0a2233; /* permukaan terangkat — header/footer */
@@ -18,7 +18,7 @@
 @layer base {
   body {
     @apply bg-abyss text-foam antialiased;
-    /* cahaya halus dari permukaan laut */
+    /* cahaya halus dari cakrawala langit malam */
     background-image: radial-gradient(
       1200px 600px at 50% -10%,
       color-mix(in oklab, var(--color-surf) 12%, transparent),
@@ -30,6 +30,79 @@
   ::selection {
     @apply bg-surf/30 text-foam;
   }
+
+  /* Latar langit malam: taburan bintang statis, di belakang semua konten. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-image:
+      radial-gradient(1.4px 1.4px at 12% 18%, #e8f6fb, transparent),
+      radial-gradient(1.2px 1.2px at 27% 42%, #cfe6f2, transparent),
+      radial-gradient(1.6px 1.6px at 41% 12%, #ffffff, transparent),
+      radial-gradient(1.2px 1.2px at 58% 33%, #bfe0ee, transparent),
+      radial-gradient(1.5px 1.5px at 73% 16%, #e8f6fb, transparent),
+      radial-gradient(1.2px 1.2px at 84% 46%, #cfe6f2, transparent),
+      radial-gradient(1.3px 1.3px at 8% 62%, #e8f6fb, transparent),
+      radial-gradient(1.1px 1.1px at 33% 74%, #bfe0ee, transparent),
+      radial-gradient(1.5px 1.5px at 52% 63%, #ffffff, transparent),
+      radial-gradient(1.2px 1.2px at 67% 82%, #cfe6f2, transparent),
+      radial-gradient(1.3px 1.3px at 90% 71%, #e8f6fb, transparent),
+      radial-gradient(1.1px 1.1px at 19% 88%, #bfe0ee, transparent),
+      radial-gradient(1.4px 1.4px at 46% 90%, #e8f6fb, transparent),
+      radial-gradient(1.2px 1.2px at 78% 92%, #cfe6f2, transparent);
+    animation: twinkle 6s ease-in-out infinite;
+  }
+
+  /* Bulan sabit di pojok kanan atas (trik inset shadow). */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 5.5rem;
+    right: 6%;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    box-shadow: inset -14px 6px 0 0 var(--color-foam);
+    filter: drop-shadow(0 0 14px color-mix(in oklab, var(--color-foam) 45%, transparent));
+    opacity: 0.85;
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Harapan yang berterbangan: kilau kecil naik perlahan lalu memudar. */
+@keyframes drift {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-120px) scale(1.1);
+    opacity: 0;
+  }
+}
+.animate-drift {
+  animation: drift 7s ease-in-out infinite;
 }
 
 /* Gelembung tech stack yang mengapung pelan di hero. */
@@ -44,4 +117,29 @@
 }
 .animate-bob {
   animation: bob 4s ease-in-out infinite;
+}
+
+/* Shimmer skeleton: sapuan cahaya melintasi placeholder saat loading.
+   Pakai .shimmer di elemen mana pun; warnanya ikut tema laut. */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-surf) 12%, transparent),
+    transparent
+  );
+  animation: shimmer 1.4s infinite;
 }

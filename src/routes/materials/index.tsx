@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { SectionHeading } from '@/components/molecules/SectionHeading'
-import { MaterialCard } from '@/components/molecules/MaterialCard'
+import { MaterialCard, MaterialCardSkeleton } from '@/components/molecules/MaterialCard'
 import { useMaterials } from '@/api/materials/useMaterials'
 import type { Material } from '@/content/materials'
 
@@ -42,7 +42,7 @@ function Materials() {
     <div className="mx-auto w-full max-w-6xl px-6 py-16">
       <SectionHeading
         title="Semua Materi"
-        subtitle="Kumpulan catatan & pembelajaran untuk semua."
+        subtitle="Kalau gue sempat belajar sesuatu, biasanya bakal gue tulis di sini."
       />
 
       <input
@@ -54,16 +54,20 @@ function Materials() {
       />
 
       {isLoading ? (
-        <p className="mt-10 text-mist">Memuat materi…</p>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <MaterialCardSkeleton key={i} />
+          ))}
+        </div>
       ) : isError ? (
         <p className="mt-10 text-red-300">
-          Gagal memuat materi. Pastikan server API aktif.
+          Waduh, materinya gagal dimuat. Cek koneksi atau coba lagi sebentar ya.
         </p>
       ) : items.length === 0 ? (
         <p className="mt-10 text-mist">
           {(data ?? []).length === 0
-            ? 'Belum ada materi.'
-            : `Tidak ada materi yang cocok dengan "${query}".`}
+            ? 'Belum ada materi di sini—tapi tenang, lagi disiapkan.'
+            : `Nggak ada materi yang cocok sama "${query}". Coba kata kunci lain?`}
         </p>
       ) : (
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

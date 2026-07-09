@@ -13,8 +13,8 @@ function Projects() {
   return (
     <div className="mx-auto w-full max-w-6xl px-6 py-16">
       <SectionHeading
-        title="lets try"
-        subtitle="Template & library open-source buatan saya. Silakan dipakai dan dibagikan."
+        title="Ayo coba sendiri"
+        subtitle="Template & library open-source buatan saya. Bebas dipakai, dimodif, dan dibagikan."
       />
 
       {items.length === 0 ? (

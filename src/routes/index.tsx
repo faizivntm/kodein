@@ -3,9 +3,9 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { FaJava, FaPython, FaReact, FaJs } from 'react-icons/fa'
 import { SiTypescript, SiTailwindcss } from 'react-icons/si'
 import { Button } from '@/components/atoms/Button'
-import { WhaleLogo } from '@/components/atoms/WhaleLogo'
+import { BoyCodeLogo } from '@/components/atoms/BoyCodeLogo'
 import { SectionHeading } from '@/components/molecules/SectionHeading'
-import { MaterialCard } from '@/components/molecules/MaterialCard'
+import { MaterialCard, MaterialCardSkeleton } from '@/components/molecules/MaterialCard'
 import { ProjectCard } from '@/components/molecules/ProjectCard'
 import { useMaterials } from '@/api/materials/useMaterials'
 import { sortedProjects } from '@/content/projects'
@@ -14,7 +14,7 @@ export const Route = createFileRoute('/')({
   component: Index,
 })
 
-// Gelembung tech stack yang "disembur" paus. pos: posisi absolut, delay: stagger animasi.
+// Gelembung tech stack yang mengorbit si anak. pos: posisi absolut, delay: stagger animasi.
 const stack = [
   { Icon: FaJava, color: '#e76f00', label: 'Java', pos: 'left-[8%] top-[46%]', size: 'h-11 w-11', delay: '0s' },
   { Icon: FaPython, color: '#3776ab', label: 'Python', pos: 'left-[30%] top-[8%]', size: 'h-14 w-14', delay: '.6s' },
@@ -25,7 +25,7 @@ const stack = [
 ]
 
 function Index() {
-  const { data } = useMaterials()
+  const { data, isLoading } = useMaterials()
   const latest = (data ?? []).slice(0, 4)
   const topics = useMemo(() => {
     const count = new Map<string, number>()
@@ -40,25 +40,37 @@ function Index() {
       <section className="grid items-center gap-10 py-20 lg:grid-cols-2">
         <div>
           <h1 className="text-5xl font-bold tracking-tight sm:text-6xl">
-            paiss<span className="text-surf">Paus</span>.
+            boy<span className="text-surf">Code</span>.
           </h1>
           <p className="mt-5 max-w-xl text-lg text-mist">
-            Mungkin coding tak lagi butuh kamu karena AI menggantikan
-            pekerjaanmu. Tapi kalau AI gagal, dunia tetap butuh programmer
-            seperti kamu.
+          Bug boleh datang tiap hari. Yang nggak boleh hilang cuma semangat buat belajar lagi.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/materials">
-              <Button className="min-w-40">Start Swimming</Button>
+              <Button className="min-w-40">Gas Ngulik</Button>
             </Link>
             <Link to="/about">
-              <Button variant="secondary">Take a breath</Button>
+              <Button variant="secondary">Kenalan dulu</Button>
             </Link>
           </div>
         </div>
 
-        {/* Art: paus menyembur tech stack */}
+        {/* Art: si anak dikelilingi orbit tech stack */}
         <div className="relative mx-auto h-72 w-full max-w-sm sm:h-80">
+          {/* Harapan yang berterbangan */}
+          {[
+            { pos: 'left-[15%] bottom-[12%]', delay: '0s' },
+            { pos: 'left-[72%] bottom-[22%]', delay: '1.6s' },
+            { pos: 'left-[42%] bottom-[6%]', delay: '3.1s' },
+            { pos: 'left-[86%] bottom-[38%]', delay: '2.3s' },
+            { pos: 'left-[26%] bottom-[32%]', delay: '4.2s' },
+          ].map((s, i) => (
+            <span
+              key={i}
+              style={{ animationDelay: s.delay }}
+              className={`animate-drift pointer-events-none absolute ${s.pos} h-1.5 w-1.5 rounded-full bg-sun shadow-[0_0_8px_2px_rgba(245,158,11,0.6)]`}
+            />
+          ))}
           {stack.map((t) => (
             <div
               key={t.label}
@@ -69,18 +81,22 @@ function Index() {
               <t.Icon className="h-1/2 w-1/2" style={{ color: t.color }} />
             </div>
           ))}
-          <WhaleLogo className="absolute bottom-0 left-1/2 h-44 w-auto -translate-x-1/2 drop-shadow-[0_0_30px_rgba(34,211,238,0.35)]" />
+          <BoyCodeLogo full className="absolute bottom-0 left-1/2 h-64 w-auto -translate-x-1/2 drop-shadow-[0_0_30px_rgba(34,211,238,0.35)]" />
         </div>
       </section>
 
       {/* Explore: kategori */}
       <section className="py-10">
         <SectionHeading
-          title="Where do you want to go?"
-          subtitle="Just keep swimming, and you'll find your place."
+          title="Mau mulai dari mana?"
+          subtitle="Satu materi hari ini lebih baik daripada seratus rencana yang nggak pernah dimulai."
         />
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {topics.map((t) => (
+          {isLoading
+            ? Array.from({ length: 4 }).map((_, i) => (
+                <MaterialCardSkeleton key={i} />
+              ))
+            :topics.map((t) => (
             <Link
               key={t.name}
               to="/materials"
@@ -102,13 +118,15 @@ function Index() {
       {/* Latest: materi terbaru */}
       <section className="py-10">
         <SectionHeading
-          title="Fresh from the surface"
-          subtitle="Materi & catatan terbaru dari kedalaman laut."
+          title="Baru keluar dari editor"
+          subtitle="Catatan baru, hasil ngoprek semalaman."
         />
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {latest.map((m) => (
-            <MaterialCard key={m.slug} material={m} />
-          ))}
+          {isLoading
+            ? Array.from({ length: 4 }).map((_, i) => (
+                <MaterialCardSkeleton key={i} />
+              ))
+            : latest.map((m) => <MaterialCard key={m.slug} material={m} />)}
         </div>
       </section>
 
@@ -117,8 +135,8 @@ function Index() {
         <section className="py-10 pb-20">
           <div className="flex items-end justify-between gap-4">
             <SectionHeading
-              title="Lets try"
-              subtitle="Template & library open-source. Silakan dipakai dan dibagikan."
+              title="Ngoprek yuk!"
+              subtitle="Template, boilerplate, dan project open-source. Ambil, modif, lalu bikin versi lu sendiri."
             />
             <Link
               to="/projects"

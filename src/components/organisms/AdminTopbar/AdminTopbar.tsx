@@ -2,7 +2,7 @@ import { Link, useNavigate } from '@tanstack/react-router'
 import { useQueryClient } from '@tanstack/react-query'
 import { FaArrowUpRightFromSquare } from 'react-icons/fa6'
 import { Button } from '@/components/atoms/Button'
-import { WhaleLogo } from '@/components/atoms/WhaleLogo'
+import { BoyCodeLogo } from '@/components/atoms/BoyCodeLogo'
 
 // Organism: topbar khusus halaman /admin (login tidak memakainya).
 export function AdminTopbar() {
@@ -19,8 +19,8 @@ export function AdminTopbar() {
     <header className="sticky top-0 z-50 border-b border-line bg-deep/80 backdrop-blur">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
         <div className="flex items-center gap-2 text-lg font-bold text-foam">
-          <WhaleLogo className="h-9 w-auto" />
-          paiss<span className="text-surf">Paus</span>
+          <BoyCodeLogo className="h-9 w-auto" />
+          boy<span className="text-surf">Code</span>
           <span className="ml-1 rounded-md bg-surf/10 px-2 py-0.5 text-xs font-medium text-surf">
             Admin
           </span>

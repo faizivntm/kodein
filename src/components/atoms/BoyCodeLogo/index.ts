@@ -1,0 +1,1 @@
+export { BoyCodeLogo } from './BoyCodeLogo'

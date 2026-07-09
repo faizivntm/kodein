@@ -1,10 +1,10 @@
 import { Link } from '@tanstack/react-router'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { NavLink } from '@/components/molecules/NavLink'
-import { WhaleLogo } from '@/components/atoms/WhaleLogo'
+import { BoyCodeLogo } from '@/components/atoms/BoyCodeLogo'
 import { useToggle } from '@/hooks/useToggle'
 
-// Organism: header sticky dengan blur di atas laut.
+// Organism: header sticky dengan blur di langit malam.
 // Desktop: nav inline. Mobile: nav collapse jadi menu hamburger.
 export function Header() {
   const [open, toggle] = useToggle(false)
@@ -17,15 +17,15 @@ export function Header() {
           onClick={() => open && toggle()}
           className="flex shrink-0 items-center gap-2 text-lg font-bold text-foam"
         >
-          <WhaleLogo className="h-9 w-auto" />
-          paiss<span className="text-surf">Paus</span>.
+          <BoyCodeLogo className="h-9 w-auto" />
+          boy<span className="text-surf">Code</span>.
         </Link>
 
         {/* Nav desktop */}
         <nav className="hidden gap-6 text-sm sm:flex">
           <NavLink to="/">Home</NavLink>
           <NavLink to="/materials">Materi</NavLink>
-          <NavLink to="/projects">Let's Try</NavLink>
+          <NavLink to="/projects">Tools</NavLink>
           <NavLink to="/about">About</NavLink>
         </nav>
 
