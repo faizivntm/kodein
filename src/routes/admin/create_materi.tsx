@@ -11,9 +11,13 @@ import {
   FaPenToSquare,
   FaTrash,
 } from 'react-icons/fa6'
+import { useState } from 'react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AdminTopbar } from '@/components/organisms/AdminTopbar'
 import { useMaterials } from '@/api/materials/useMaterials'
+import { deleteMaterial } from '@/api/materials/deleteMaterial'
 import { formatDate } from '@/lib/utils'
+import type { Material } from '@/content/materials'
 
 export const Route = createFileRoute('/admin/create_materi')({
   // Guard: tanpa token, lempar ke login.
@@ -65,6 +69,22 @@ function Dashboard() {
       Icon: FaClock,
     },
   ]
+
+  // Materi yang mau dihapus (buka dialog konfirmasi). null = dialog tertutup.
+  const [toDelete, setToDelete] = useState<Material | null>(null)
+  const queryClient = useQueryClient()
+  const del = useMutation({
+    mutationFn: (id: number) => deleteMaterial(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['materials'] })
+      setToDelete(null)
+    },
+  })
+
+  const askDelete = (m: Material) => {
+    del.reset() // buang error dari percobaan sebelumnya
+    setToDelete(m)
+  }
 
   return (
     <div className="flex min-h-svh flex-col">
@@ -193,21 +213,20 @@ function Dashboard() {
                   >
                     <FaArrowRight className="h-3.5 w-3.5" />
                   </Link>
-                  <button
-                    type="button"
-                    disabled
-                    aria-label="Edit (segera)"
-                    title="Segera"
-                    className="rounded p-2 opacity-30"
+                  <Link
+                    to="/admin/materials/$id"
+                    params={{ id: String(m.id) }}
+                    aria-label="Edit materi"
+                    className="rounded p-2 hover:bg-white/5 hover:text-foam"
                   >
                     <FaPenToSquare className="h-3.5 w-3.5" />
-                  </button>
+                  </Link>
                   <button
                     type="button"
-                    disabled
-                    aria-label="Hapus (segera)"
-                    title="Segera"
-                    className="rounded p-2 opacity-30"
+                    aria-label="Hapus materi"
+                    title="Hapus"
+                    className="rounded p-2 hover:bg-red-500/10 hover:text-red-300"
+                    onClick={() => askDelete(m)}
                   >
                     <FaTrash className="h-3.5 w-3.5" />
                   </button>
@@ -217,6 +236,48 @@ function Dashboard() {
           )}
         </div>
       </main>
+
+      {/* Dialog konfirmasi hapus */}
+      {toDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-abyss/70 p-6 backdrop-blur-sm">
+          <div className="w-full max-w-sm rounded-2xl border border-line bg-deep p-6 shadow-xl">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-500/15 text-red-400">
+              <FaTrash className="h-5 w-5" />
+            </div>
+            <h3 className="mt-4 text-center text-lg font-semibold text-foam">
+              Hapus materi?
+            </h3>
+            <p className="mt-1 break-words text-center text-sm text-mist">
+              "{toDelete.title}" akan dihapus permanen. Tindakan ini tidak bisa dibatalkan.
+            </p>
+
+            {del.isError && (
+              <p className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+                {del.error.message}
+              </p>
+            )}
+
+            <div className="mt-6 flex gap-3">
+              <button
+                type="button"
+                onClick={() => setToDelete(null)}
+                disabled={del.isPending}
+                className="flex-1 rounded-lg border border-line px-4 py-2 text-sm text-mist transition-colors hover:bg-white/5 hover:text-foam disabled:opacity-50"
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                onClick={() => toDelete.id && del.mutate(toDelete.id)}
+                disabled={del.isPending}
+                className="flex-1 rounded-lg bg-red-500/90 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-500 disabled:opacity-50"
+              >
+                {del.isPending ? 'Menghapus…' : 'Hapus'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -14,6 +14,7 @@ export type Block =
   | { type: 'html'; html: string } // konten rich-text dari editor ala Medium
 
 export interface Material {
+  id?: number // dari backend; kosong saat materi baru (belum tersimpan)
   slug: string // dipakai di URL: /materials/<slug> — huruf kecil, pakai tanda hubung
   title: string
   summary: string // 1–2 kalimat, muncul di kartu

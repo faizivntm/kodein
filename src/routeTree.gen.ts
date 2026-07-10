@@ -17,6 +17,7 @@ import { Route as MaterialsSlugRouteImport } from './routes/materials/$slug'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminCreate_materiRouteImport } from './routes/admin/create_materi'
 import { Route as AdminMaterialsNewRouteImport } from './routes/admin/materials/new'
+import { Route as AdminMaterialsIdRouteImport } from './routes/admin/materials/$id'
 
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
@@ -58,6 +59,11 @@ const AdminMaterialsNewRoute = AdminMaterialsNewRouteImport.update({
   path: '/admin/materials/new',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminMaterialsIdRoute = AdminMaterialsIdRouteImport.update({
+  id: '/admin/materials/$id',
+  path: '/admin/materials/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/admin/login': typeof AdminLoginRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/materials/': typeof MaterialsIndexRoute
+  '/admin/materials/$id': typeof AdminMaterialsIdRoute
   '/admin/materials/new': typeof AdminMaterialsNewRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/admin/login': typeof AdminLoginRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/materials': typeof MaterialsIndexRoute
+  '/admin/materials/$id': typeof AdminMaterialsIdRoute
   '/admin/materials/new': typeof AdminMaterialsNewRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/admin/login': typeof AdminLoginRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/materials/': typeof MaterialsIndexRoute
+  '/admin/materials/$id': typeof AdminMaterialsIdRoute
   '/admin/materials/new': typeof AdminMaterialsNewRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/materials/$slug'
     | '/materials/'
+    | '/admin/materials/$id'
     | '/admin/materials/new'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/materials/$slug'
     | '/materials'
+    | '/admin/materials/$id'
     | '/admin/materials/new'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/materials/$slug'
     | '/materials/'
+    | '/admin/materials/$id'
     | '/admin/materials/new'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
   MaterialsSlugRoute: typeof MaterialsSlugRoute
   MaterialsIndexRoute: typeof MaterialsIndexRoute
+  AdminMaterialsIdRoute: typeof AdminMaterialsIdRoute
   AdminMaterialsNewRoute: typeof AdminMaterialsNewRoute
 }
 
@@ -192,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminMaterialsNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/materials/$id': {
+      id: '/admin/materials/$id'
+      path: '/admin/materials/$id'
+      fullPath: '/admin/materials/$id'
+      preLoaderRoute: typeof AdminMaterialsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
   MaterialsSlugRoute: MaterialsSlugRoute,
   MaterialsIndexRoute: MaterialsIndexRoute,
+  AdminMaterialsIdRoute: AdminMaterialsIdRoute,
   AdminMaterialsNewRoute: AdminMaterialsNewRoute,
 }
 export const routeTree = rootRouteImport
