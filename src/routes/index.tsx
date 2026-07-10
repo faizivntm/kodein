@@ -3,7 +3,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { FaJava, FaPython, FaReact, FaJs } from 'react-icons/fa'
 import { SiTypescript, SiTailwindcss } from 'react-icons/si'
 import { Button } from '@/components/atoms/Button'
-import { BoyCodeLogo } from '@/components/atoms/BoyCodeLogo'
+import { KodeinLogo } from '@/components/atoms/KodeinLogo'
 import { SectionHeading } from '@/components/molecules/SectionHeading'
 import { MaterialCard, MaterialCardSkeleton } from '@/components/molecules/MaterialCard'
 import { ProjectCard } from '@/components/molecules/ProjectCard'
@@ -40,10 +40,10 @@ function Index() {
       <section className="grid items-center gap-10 py-20 lg:grid-cols-2">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-surf">
-            Mobile &amp; Web Developer
+            Software Engineer
           </p>
           <h1 className="mt-2 text-5xl font-bold tracking-tight sm:text-6xl">
-            boy<span className="text-surf">Code</span>.
+            ko<span className="text-surf">Dein</span>.
           </h1>
           <p className="mt-5 max-w-xl text-lg text-mist">
             Dokumentasi belajar &amp; coding gue — tempat gue nyatet dan berbagi hal
@@ -88,7 +88,7 @@ function Index() {
               <t.Icon className="h-1/2 w-1/2" style={{ color: t.color }} />
             </div>
           ))}
-          <BoyCodeLogo full className="absolute bottom-0 left-1/2 h-64 w-auto -translate-x-1/2 drop-shadow-[0_0_30px_rgba(34,211,238,0.35)]" />
+          <KodeinLogo full className="absolute bottom-0 left-1/2 h-70 w-auto -translate-x-1/2 drop-shadow-[0_0_30px_rgba(34,211,238,0.35)]" />
         </div>
       </section>
 

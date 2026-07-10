@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { FaCode, FaInstagram, FaJava, FaLinkedin, FaPython } from "react-icons/fa";
-import { BoyCodeLogo } from '@/components/atoms/BoyCodeLogo'
+import { KodeinLogo } from '@/components/atoms/KodeinLogo'
 
 // Organism: footer 4 kolom, senada dengan tema langit malam.
 export function Footer() {
@@ -9,8 +9,8 @@ export function Footer() {
       <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-2">
           <span className="flex items-center gap-2 text-lg font-bold text-foam">
-            <BoyCodeLogo className="h-9 w-auto" />
-            boy<span className="text-surf">Code</span>.
+            <KodeinLogo className="h-9 w-auto" />
+            ko<span className="text-surf">Dein</span>.
           </span>
           <p className="text-sm text-mist">
             Catatan & materi belajar coding. Mimpi setinggi langit malam.
@@ -45,7 +45,7 @@ export function Footer() {
         </div>
 
         <div className="space-y-2 text-sm">
-          <h3 className="font-semibold text-foam">boyCode</h3>
+          <h3 className="font-semibold text-foam">kodein</h3>
           <Link to="/about" className="block text-mist hover:text-surf">
             About
           </Link>
@@ -56,7 +56,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-line py-5 text-center text-xs text-mist">
-        © {new Date().getFullYear()} boyCode — dibuat oleh Faiz Ivan Tama.
+        © {new Date().getFullYear()} kodein — dibuat oleh Faiz Ivan Tama.
       </div>
     </footer>
   )

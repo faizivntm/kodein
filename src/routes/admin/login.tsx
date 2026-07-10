@@ -3,7 +3,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import { useMutation } from "@tanstack/react-query"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { Button } from "@/components/atoms/Button"
-import { BoyCodeLogo } from "@/components/atoms/BoyCodeLogo"
+import { KodeinLogo } from "@/components/atoms/KodeinLogo"
 import loginUser from "@/api/auth/loginUser"
 import { setTokens } from "@/api/auth/tokenStore"
 
@@ -33,8 +33,8 @@ function Login() {
         <div className="mx-auto flex min-h-[70vh] w-full max-w-md items-center px-6 pt-20">
             <div className="w-full rounded-2xl border border-line bg-tide/60 p-8 shadow-lg">
                 <div className="flex flex-col items-center gap-2 text-center">
-                    <BoyCodeLogo className="h-12 w-auto" />
-                    <h1 className="text-2xl font-bold text-foam">Masuk ke boyCode</h1>
+                    <KodeinLogo className="h-12 w-auto" />
+                    <h1 className="text-2xl font-bold text-foam">Masuk ke koDein</h1>
                     <p className="text-sm text-mist">Login admin untuk mengelola materi.</p>
                 </div>
 

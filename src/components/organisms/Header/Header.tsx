@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { NavLink } from '@/components/molecules/NavLink'
-import { BoyCodeLogo } from '@/components/atoms/BoyCodeLogo'
+import { KodeinLogo } from '@/components/atoms/KodeinLogo'
 import { useToggle } from '@/hooks/useToggle'
 
 // Organism: header sticky dengan blur di langit malam.
@@ -17,8 +17,8 @@ export function Header() {
           onClick={() => open && toggle()}
           className="flex shrink-0 items-center gap-2 text-lg font-bold text-foam"
         >
-          <BoyCodeLogo className="h-9 w-auto" />
-          boy<span className="text-surf">Code</span>.
+          <KodeinLogo className="h-9 w-auto" />
+          ko<span className="text-surf">Dein</span>.
         </Link>
 
         {/* Nav desktop */}

@@ -1,0 +1,1 @@
+export { KodeinLogo } from './KodeinLogo'

@@ -120,22 +120,22 @@ export const projects: Project[] = [
     repo: 'https://github.com/faizivntm/fastapi-tamplate-by-faiz',
   },
   {
-    title: 'boyCode (Backend)',
+    title: 'kodein (Backend)',
     description:
-      'REST API untuk platform boyCode: autentikasi, manajemen materi, fondasi backend yang bersih & modular.',
+      'REST API untuk platform kodein: autentikasi, manajemen materi, fondasi backend yang bersih & modular.',
     tech: ['FastAPI', 'SQLAlchemy', 'PostgreSQL'],
     category: 'Open Source',
     date: '2026-07-06',
-    repo: 'https://github.com/faizivntm/boycode-be',
+    repo: 'https://github.com/faizivntm/kodein-be',
   },
   {
-    title: 'boyCode (Frontend)',
+    title: 'kodein (Frontend)',
     description:
       'Platform catatan belajar coding sekaligus etalase karya. Situs yang sedang kamu buka ini.',
     tech: ['React', 'TypeScript', 'Tailwind'],
     category: 'Open Source',
     date: '2026-07-06',
-    repo: 'https://github.com/faizivntm/boycode',
+    repo: 'https://github.com/faizivntm/kodein',
   },
 
   // ── Eksperimen Belajar ──────────────────────────────────────────────

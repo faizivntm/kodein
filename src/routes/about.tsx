@@ -10,7 +10,7 @@ import {
   FaWhatsapp,
 } from 'react-icons/fa6'
 import { SectionHeading } from '@/components/molecules/SectionHeading'
-import { BoyCodeLogo } from '@/components/atoms/BoyCodeLogo'
+import {KodeinLogo} from '@/components/atoms/KodeinLogo'
 import { experience, education, certifications } from '@/content/experience'
 
 export const Route = createFileRoute('/about')({
@@ -37,7 +37,7 @@ function About() {
     <div className="mx-auto w-full max-w-4xl px-6 py-16">
       <SectionHeading
         title="Tentang"
-        subtitle="Siapa di balik boyCode, dan kenapa situs ini ada."
+        subtitle="Siapa di balik koDein. , dan kenapa situs ini ada."
       />
 
       {/* Intro */}
@@ -55,7 +55,7 @@ function About() {
             Cipta.
           </p>
           <p>
-            <span className="font-semibold text-foam">boyCode</span> lahir dari kebiasaan
+            <span className="font-semibold text-foam">kodein</span> lahir dari kebiasaan
             gue nyatet biar nggak lupa. Ternyata nyatet itu cara belajar paling jujur —
             jadi gue rapihin, publikasikan, siapa tahu berguna buat yang lain juga.
           </p>
@@ -64,9 +64,7 @@ function About() {
           </p>
         </div>
 
-        <BoyCodeLogo
-          full
-          className="order-first mx-auto h-64 w-auto drop-shadow-[0_0_30px_rgba(34,211,238,0.3)] sm:h-72 lg:order-last"
+        <KodeinLogo cry className="order-first mx-auto h-100 w-auto drop-shadow-[0_0_30px_rgba(34,211,238,0.3)] sm:h-72 lg:order-last"
         />
       </div>
 

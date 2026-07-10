@@ -1,1 +1,0 @@
-export { BoyCodeLogo } from './BoyCodeLogo'
