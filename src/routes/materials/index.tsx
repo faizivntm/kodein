@@ -77,16 +77,6 @@ function Materials() {
         }
       />
 
-      {category ? <></> : (
-        <Link
-          to="/materials"
-          search={admin ? { admin: true } : {}}
-          className="mt-3 inline-flex items-center gap-1.5 text-sm text-mist hover:text-surf"
-        >
-          <FaArrowLeft className="h-3 w-3" /> Lihat semua kategori
-        </Link>
-      )}
-
       <input
         type="search"
         value={query}
