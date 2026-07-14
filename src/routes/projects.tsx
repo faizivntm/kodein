@@ -4,6 +4,17 @@ import { ProjectCard } from '@/components/molecules/ProjectCard'
 import { sortedProjects, PROJECT_GROUPS } from '@/content/projects'
 
 export const Route = createFileRoute('/projects')({
+  head: () => ({
+    meta: [
+      {
+        title: 'Karya — koDein',
+      },
+      {
+        name: 'description',
+        content: 'Kumpulan karya profesional, open source, dan eksperimen. Dari aplikasi enterprise hingga proyek AI dengan HAKI terdaftar.',
+      },
+    ],
+  }),
   component: Projects,
 })
 

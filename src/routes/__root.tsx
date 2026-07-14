@@ -9,4 +9,18 @@ const RootLayout = () => (
   </MainLayout>
 )
 
-export const Route = createRootRoute({ component: RootLayout })
+export const Route = createRootRoute({
+  head: () => ({
+    meta: [
+      {
+        title: 'koDein — Software Engineer',
+      },
+      {
+        name: 'description',
+        content:
+          'Dokumentasi belajar & coding. Tempat nyatet hal fundamental pemrograman, sekaligus etalase karya yang pernah dibangun.',
+      },
+    ],
+  }),
+  component: RootLayout,
+})

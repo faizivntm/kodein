@@ -17,6 +17,17 @@ export const Route = createFileRoute('/materials/')({
       ? { category: search.category }
       : {}),
   }),
+  head: () => ({
+    meta: [
+      {
+        title: 'Materi — koDein',
+      },
+      {
+        name: 'description',
+        content: 'Kumpulan catatan belajar coding — konsep fundamental, best practices, dan teknik pemrograman dari berbagai topik.',
+      },
+    ],
+  }),
   component: Materials,
 })
 

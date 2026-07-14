@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { createFileRoute, Link, useRouter } from '@tanstack/react-router'
 import { ContentBlocks } from '@/components/organisms/ContentBlocks'
 import { AdminTopbar } from '@/components/organisms/AdminTopbar'
@@ -18,6 +19,15 @@ function MaterialDetail() {
   const { data, isLoading, isError } = useMaterials()
 
   const material = data?.find((m) => m.slug === slug)
+
+  // ponytail: native DOM API to set per-article title/description — avoids route loader refactor
+  useEffect(() => {
+    if (material && !isLoading) {
+      document.title = `${material.title} — koDein`
+      const metaDesc = document.querySelector('meta[name="description"]')
+      if (metaDesc) metaDesc.setAttribute('content', material.summary)
+    }
+  }, [material, isLoading])
 
   // Tombol kembali: dari admin → "Back" (history), publik → link ke daftar materi.
   const back = admin ? (

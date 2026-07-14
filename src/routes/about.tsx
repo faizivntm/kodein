@@ -3,22 +3,32 @@ import {
   FaAward,
   FaBuilding,
   FaEnvelope,
-  FaGraduationCap,
   FaLinkedin,
   FaGithub,
 } from 'react-icons/fa6'
 import { SectionHeading } from '@/components/molecules/SectionHeading'
 import {KodeinLogo} from '@/components/atoms/KodeinLogo'
-import { experience, education, certifications } from '@/content/experience'
+import { experience, certifications } from '@/content/experience'
 
 export const Route = createFileRoute('/about')({
+  head: () => ({
+    meta: [
+      {
+        title: 'Tentang — koDein',
+      },
+      {
+        name: 'description',
+        content:
+          'Faiz Ivan Tama — Software Engineer yang berpengalaman dalam React, React Native, Flutter, dan AI on-device. Bekerja di PT Circle K Indonesia Utama.',
+      },
+    ],
+  }),
   component: About,
 })
 
 const highlights = [
   { Icon: FaBuilding, label: 'Sekarang di', value: 'PT Circle K Indonesia Utama' },
   { Icon: FaAward, label: 'Karya', value: 'HAKI Terdaftar' },
-  { Icon: FaGraduationCap, label: 'S1 Informatika', value: `IPK ${education.gpa}` },
 ]
 
 const contacts = [
@@ -105,16 +115,6 @@ function About() {
 
       {/* Pendidikan & sertifikasi */}
       <div className="mt-14 grid gap-8 sm:grid-cols-2">
-        <div>
-          <h2 className="text-xl font-bold text-foam">Pendidikan</h2>
-          <div className="mt-4 rounded-2xl border border-line bg-tide/50 p-5">
-            <p className="font-semibold text-foam">{education.school}</p>
-            <p className="text-sm text-mist">
-              {education.major} · {education.period}
-            </p>
-            <p className="mt-1 text-sm text-surf">IPK {education.gpa}</p>
-          </div>
-        </div>
         <div>
           <h2 className="text-xl font-bold text-foam">Sertifikasi</h2>
           <ul className="mt-4 space-y-2">

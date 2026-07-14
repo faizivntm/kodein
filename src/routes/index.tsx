@@ -11,6 +11,18 @@ import { useMaterials } from '@/api/materials/useMaterials'
 import { featuredProjects } from '@/content/projects'
 
 export const Route = createFileRoute('/')({
+  head: () => ({
+    meta: [
+      {
+        title: 'koDein — Software Engineer',
+      },
+      {
+        name: 'description',
+        content:
+          'Dokumentasi belajar & coding gue — tempat gue nyatet dan berbagi hal fundamental pemrograman. Sekaligus etalase karya yang pernah gue bangun.',
+      },
+    ],
+  }),
   component: Index,
 })
 
