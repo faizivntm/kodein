@@ -1,126 +1,59 @@
 @import 'tailwindcss';
 
-/* Design tokens — tema "kodein": langit malam + tech stack.
-   Anak sederhana (sandal jepit, kaus kutang) tapi jenius, ngoding di bawah bintang.
-   Palet: navy langit malam (surface) + cyan (aksi) + amber (sorotan hangat). */
+/* Design tokens — tema "kodein" neo-brutalist.
+   Kertas hangat + tinta hitam + lime pop. Border tebal, shadow blok, tanpa gradasi lembut.
+   Catatan: nama token tetap dari tema laut lama (abyss/surf/foam/…) supaya seluruh
+   komponen ikut berubah tanpa rename massal — cukup nilai hex-nya yang diganti. */
 @theme {
-  --color-abyss: #04121c; /* laut terdalam — background halaman */
-  --color-deep: #0a2233; /* permukaan terangkat — header/footer */
-  --color-tide: #0f2e42; /* kartu */
-  --color-line: #163a51; /* garis/border */
-  --color-surf: #22d3ee; /* aksi utama (cyan) */
-  --color-surf-deep: #0e7490; /* hover aksi */
-  --color-sun: #f59e0b; /* sorotan hangat (amber) */
-  --color-foam: #e8f6fb; /* teks utama */
-  --color-mist: #8fb3c4; /* teks sekunder */
+  --color-abyss: #fdfcf7; /* background halaman (kertas hangat) */
+  --color-deep: #fffef9; /* permukaan header/footer (nyaris putih) */
+  --color-tide: #ffffff; /* kartu (putih) */
+  --color-line: #111111; /* border & garis (tinta) */
+  --color-surf: #bef264; /* lime pop — SELALU dipasang dengan teks tinta */
+  --color-surf-deep: #a3e635; /* lime hover */
+  --color-sun: #fbbf24; /* aksen sekunder (amber) — badge */
+  --color-foam: #111111; /* teks utama (tinta) */
+  --color-mist: #57534e; /* teks sekunder (abu hangat) */
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Shadow blok khas brutalist (offset keras, tanpa blur). */
+  --shadow-brutal: 4px 4px 0 0 var(--color-line);
+  --shadow-brutal-lg: 6px 6px 0 0 var(--color-line);
 }
 
 @layer base {
   body {
-    @apply bg-abyss text-foam antialiased;
-    /* cahaya halus dari cakrawala langit malam */
-    background-image: radial-gradient(
-      1200px 600px at 50% -10%,
-      color-mix(in oklab, var(--color-surf) 12%, transparent),
-      transparent
-    );
-    background-attachment: fixed;
+    @apply bg-abyss font-sans text-foam antialiased;
+    /* Grid samar — struktur khas brutalist, halus biar nggak berisik. */
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--color-line) 4%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--color-line) 4%, transparent) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
   }
 
   ::selection {
-    @apply bg-surf/30 text-foam;
-  }
-
-  /* Latar langit malam: taburan bintang statis, di belakang semua konten. */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-repeat: no-repeat;
-    background-image:
-      radial-gradient(1.4px 1.4px at 12% 18%, #e8f6fb, transparent),
-      radial-gradient(1.2px 1.2px at 27% 42%, #cfe6f2, transparent),
-      radial-gradient(1.6px 1.6px at 41% 12%, #ffffff, transparent),
-      radial-gradient(1.2px 1.2px at 58% 33%, #bfe0ee, transparent),
-      radial-gradient(1.5px 1.5px at 73% 16%, #e8f6fb, transparent),
-      radial-gradient(1.2px 1.2px at 84% 46%, #cfe6f2, transparent),
-      radial-gradient(1.3px 1.3px at 8% 62%, #e8f6fb, transparent),
-      radial-gradient(1.1px 1.1px at 33% 74%, #bfe0ee, transparent),
-      radial-gradient(1.5px 1.5px at 52% 63%, #ffffff, transparent),
-      radial-gradient(1.2px 1.2px at 67% 82%, #cfe6f2, transparent),
-      radial-gradient(1.3px 1.3px at 90% 71%, #e8f6fb, transparent),
-      radial-gradient(1.1px 1.1px at 19% 88%, #bfe0ee, transparent),
-      radial-gradient(1.4px 1.4px at 46% 90%, #e8f6fb, transparent),
-      radial-gradient(1.2px 1.2px at 78% 92%, #cfe6f2, transparent);
-    animation: twinkle 6s ease-in-out infinite;
-  }
-
-  /* Bulan sabit di pojok kanan atas (trik inset shadow). */
-  body::after {
-    content: '';
-    position: fixed;
-    top: 5.5rem;
-    right: 6%;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    box-shadow: inset -14px 6px 0 0 var(--color-foam);
-    filter: drop-shadow(0 0 14px color-mix(in oklab, var(--color-foam) 45%, transparent));
-    opacity: 0.85;
-    z-index: -1;
-    pointer-events: none;
+    @apply bg-surf text-foam;
   }
 }
 
-@keyframes twinkle {
-  0%,
-  100% {
-    opacity: 0.55;
+@layer components {
+  /* Kotak brutalist: border tinta tebal + shadow blok. */
+  .brutal {
+    @apply border-2 border-line bg-tide shadow-brutal;
   }
-  50% {
-    opacity: 1;
+  /* Efek "ketekan": kartu/tombol geser ke shadow-nya saat hover. */
+  .brutal-press {
+    @apply transition-transform duration-100 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none;
   }
 }
 
-/* Harapan yang berterbangan: kilau kecil naik perlahan lalu memudar. */
-@keyframes drift {
-  0% {
-    transform: translateY(0) scale(0.8);
-    opacity: 0;
-  }
-  15% {
-    opacity: 0.9;
-  }
-  85% {
-    opacity: 0.9;
-  }
-  100% {
-    transform: translateY(-120px) scale(1.1);
-    opacity: 0;
-  }
-}
-.animate-drift {
-  animation: drift 7s ease-in-out infinite;
-}
-
-/* Gelembung tech stack yang mengapung pelan di hero. */
-@keyframes bob {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-.animate-bob {
-  animation: bob 4s ease-in-out infinite;
-}
-
-/* Shimmer skeleton: sapuan cahaya melintasi placeholder saat loading.
-   Pakai .shimmer di elemen mana pun; warnanya ikut tema laut. */
+/* Shimmer skeleton: sapuan cahaya melintasi placeholder saat loading. */
 @keyframes shimmer {
   100% {
     transform: translateX(100%);
@@ -138,7 +71,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    color-mix(in oklab, var(--color-surf) 12%, transparent),
+    color-mix(in oklab, var(--color-line) 8%, transparent),
     transparent
   );
   animation: shimmer 1.4s infinite;
@@ -156,6 +89,7 @@
 }
 .rich h2 {
   margin-top: 2rem;
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.3;
@@ -163,13 +97,18 @@
 }
 .rich h3 {
   margin-top: 1.5rem;
+  font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-foam);
 }
 .rich a {
-  color: var(--color-surf);
+  color: var(--color-foam);
+  font-weight: 600;
   text-decoration: underline;
+  text-decoration-color: var(--color-surf-deep);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 2px;
 }
 .rich strong {
   font-weight: 700;
@@ -190,42 +129,48 @@
   margin-top: 0.25rem;
 }
 .rich li::marker {
-  color: var(--color-surf);
+  color: var(--color-line);
 }
 .rich blockquote {
-  border-left: 3px solid var(--color-surf);
-  padding-left: 1rem;
+  border-left: 4px solid var(--color-line);
+  background: color-mix(in oklab, var(--color-surf) 25%, transparent);
+  padding: 0.75rem 1rem;
   font-style: italic;
-  color: var(--color-mist);
+  color: var(--color-foam);
 }
 .rich code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.875em;
-  background: color-mix(in oklab, var(--color-surf) 14%, transparent);
+  background: color-mix(in oklab, var(--color-surf) 40%, transparent);
   color: var(--color-foam);
   padding: 0.1em 0.35em;
-  border-radius: 0.35rem;
+  border-radius: 0;
+  border: 1px solid var(--color-line);
 }
 .rich pre {
   overflow-x: auto;
-  border: 1px solid var(--color-line);
-  border-radius: 0.75rem;
-  background: var(--color-abyss);
+  border: 2px solid var(--color-line);
+  border-radius: 0;
+  background: #12100e;
+  color: #f5e6c8;
   padding: 1rem;
+  box-shadow: var(--shadow-brutal);
 }
 .rich pre code {
   background: none;
+  border: none;
   padding: 0;
   font-size: 0.875rem;
-  color: var(--color-foam);
+  color: #f5e6c8;
 }
 .rich hr {
   border: none;
-  border-top: 1px solid var(--color-line);
+  border-top: 2px solid var(--color-line);
 }
 .rich img {
   max-width: 100%;
-  border-radius: 0.5rem;
+  border: 2px solid var(--color-line);
+  border-radius: 0;
 }
 /* Placeholder editor saat kosong (dari @tiptap/extension-placeholder). */
 .rich p.is-editor-empty:first-child::before {

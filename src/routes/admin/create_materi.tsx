@@ -92,21 +92,18 @@ function Dashboard() {
       <AdminTopbar />
 
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
-        <h1 className="text-3xl font-bold text-foam">Dashboard Admin</h1>
+        <h1 className="font-display text-3xl font-bold text-foam">Dashboard Admin</h1>
         <p className="mt-1 text-mist">Mau menambahkan apa hari ini?</p>
 
         {/* Statistik */}
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           {stats.map((s) => (
-            <div
-              key={s.label}
-              className="flex items-center gap-4 rounded-2xl border border-line bg-tide/50 p-5"
-            >
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-surf/10 text-surf">
+            <div key={s.label} className="brutal flex items-center gap-4 p-5">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center border-2 border-line bg-surf text-foam">
                 <s.Icon className="h-5 w-5" />
               </div>
               <div className="min-w-0">
-                <p className="truncate text-2xl font-bold text-foam">{s.value}</p>
+                <p className="truncate font-display text-2xl font-bold text-foam">{s.value}</p>
                 <p className="text-sm text-mist">{s.label}</p>
               </div>
             </div>
@@ -114,7 +111,7 @@ function Dashboard() {
         </div>
 
         {/* Aksi cepat */}
-        <h2 className="mt-10 text-sm font-semibold uppercase tracking-wide text-mist">
+        <h2 className="mt-10 text-sm font-bold uppercase tracking-wide text-mist">
           Aksi cepat
         </h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -124,12 +121,12 @@ function Dashboard() {
                 key={a.title}
                 to={a.to}
                 search={a.title == "Kelola Materi" && {admin: true}}
-                className="group rounded-2xl border border-line bg-tide/60 p-6 transition-colors hover:border-surf/50 hover:bg-tide"
+                className="group brutal brutal-press p-6"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-surf/10 text-surf">
+                <div className="flex h-11 w-11 items-center justify-center border-2 border-line bg-surf text-foam">
                   <a.Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 flex items-center gap-2 text-lg font-semibold text-foam group-hover:text-surf">
+                <h3 className="mt-4 flex items-center gap-2 font-display text-lg font-bold text-foam">
                   {a.title}
                   <FaArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </h3>
@@ -138,14 +135,14 @@ function Dashboard() {
             ) : (
               <div
                 key={a.title}
-                className="rounded-2xl border border-line bg-tide/30 p-6 opacity-60"
+                className="border-2 border-dashed border-line bg-abyss p-6 opacity-70"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-mist">
+                <div className="flex h-11 w-11 items-center justify-center border-2 border-line bg-abyss text-mist">
                   <a.Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 flex items-center gap-2 text-lg font-semibold text-foam">
+                <h3 className="mt-4 flex items-center gap-2 font-display text-lg font-bold text-foam">
                   {a.title}
-                  <span className="rounded-md bg-white/5 px-2 py-0.5 text-xs font-medium text-mist">
+                  <span className="border-2 border-line bg-sun px-2 py-0.5 text-xs font-bold text-foam">
                     Segera
                   </span>
                 </h3>
@@ -157,34 +154,34 @@ function Dashboard() {
 
         {/* Materi terbaru */}
         <div className="mt-10 flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-mist">
+          <h2 className="text-sm font-bold uppercase tracking-wide text-mist">
             Materi terbaru
           </h2>
           <Link
             to="/materials"
             search={{ admin: true }}
-            className="text-xs text-surf hover:underline"
+            className="text-xs font-bold text-foam underline-offset-4 hover:underline"
           >
             Lihat semua →
           </Link>
         </div>
 
-        <div className="mt-4 overflow-hidden rounded-2xl border border-line">
+        <div className="mt-4 overflow-hidden border-2 border-line shadow-brutal">
           {isLoading ? (
             <div className="space-y-px">
               {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="h-14 animate-pulse bg-tide/40" />
+                <div key={i} className="h-14 animate-pulse bg-line/10" />
               ))}
             </div>
           ) : recent.length === 0 ? (
-            <div className="flex flex-col items-center gap-3 bg-tide/30 px-6 py-12 text-center">
+            <div className="flex flex-col items-center gap-3 bg-tide px-6 py-12 text-center">
               <FaBookOpen className="h-6 w-6 text-mist" />
               <p className="text-sm text-mist">
                 Belum ada materi. Yuk tulis yang pertama.
               </p>
               <Link
                 to="/admin/materials/new"
-                className="text-sm font-medium text-surf hover:underline"
+                className="text-sm font-bold text-foam underline-offset-4 hover:underline"
               >
                 Tulis Materi →
               </Link>
@@ -193,25 +190,25 @@ function Dashboard() {
             recent.map((m) => (
               <div
                 key={m.slug}
-                className="flex items-center gap-4 border-b border-line bg-tide/30 px-5 py-3 last:border-b-0 hover:bg-tide/50"
+                className="flex items-center gap-4 border-b-2 border-line bg-tide px-5 py-3 last:border-b-0 hover:bg-surf/20"
               >
                 <div className="min-w-0 flex-1">
-                  <p className="truncate font-medium text-foam">{m.title}</p>
+                  <p className="truncate font-bold text-foam">{m.title}</p>
                   <div className="mt-0.5 flex items-center gap-2 text-xs text-mist">
-                    <span className="rounded-full bg-surf/10 px-2 py-0.5 font-medium text-surf">
+                    <span className="border-2 border-line bg-surf px-2 py-0.5 font-bold text-foam">
                       {m.category}
                     </span>
                     <span>{formatDate(m.date)}</span>
                   </div>
                 </div>
                 {/* Slot aksi (aktif setelah endpoint edit/hapus siap) */}
-                <div className="flex items-center gap-1 text-mist">
+                <div className="flex items-center gap-2 text-foam">
                   <Link
                     to="/materials/$slug"
                     params={{ slug: m.slug }}
                     search={{ admin: true }}
                     aria-label="Lihat materi"
-                    className="rounded p-2 hover:bg-white/5 hover:text-foam"
+                    className="border-2 border-line p-2 hover:bg-surf"
                   >
                     <FaArrowRight className="h-3.5 w-3.5" />
                   </Link>
@@ -219,7 +216,7 @@ function Dashboard() {
                     to="/admin/materials/$id"
                     params={{ id: String(m.id) }}
                     aria-label="Edit materi"
-                    className="rounded p-2 hover:bg-white/5 hover:text-foam"
+                    className="border-2 border-line p-2 hover:bg-surf"
                   >
                     <FaPenToSquare className="h-3.5 w-3.5" />
                   </Link>
@@ -227,7 +224,7 @@ function Dashboard() {
                     type="button"
                     aria-label="Hapus materi"
                     title="Hapus"
-                    className="rounded p-2 hover:bg-red-500/10 hover:text-red-300"
+                    className="border-2 border-line p-2 hover:bg-red-400"
                     onClick={() => askDelete(m)}
                   >
                     <FaTrash className="h-3.5 w-3.5" />
@@ -241,12 +238,12 @@ function Dashboard() {
 
       {/* Dialog konfirmasi hapus */}
       {toDelete && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-abyss/70 p-6 backdrop-blur-sm">
-          <div className="w-full max-w-sm rounded-2xl border border-line bg-deep p-6 shadow-xl">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-500/15 text-red-400">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-line/40 p-6">
+          <div className="w-full max-w-sm border-2 border-line bg-tide p-6 shadow-brutal-lg">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center border-2 border-line bg-red-400 text-foam">
               <FaTrash className="h-5 w-5" />
             </div>
-            <h3 className="mt-4 text-center text-lg font-semibold text-foam">
+            <h3 className="mt-4 text-center font-display text-lg font-bold text-foam">
               Hapus materi?
             </h3>
             <p className="mt-1 break-words text-center text-sm text-mist">
@@ -254,7 +251,7 @@ function Dashboard() {
             </p>
 
             {del.isError && (
-              <p className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+              <p className="mt-4 border-2 border-line bg-red-100 px-3 py-2 text-sm font-medium text-red-700">
                 {del.error.message}
               </p>
             )}
@@ -264,7 +261,7 @@ function Dashboard() {
                 type="button"
                 onClick={() => setToDelete(null)}
                 disabled={del.isPending}
-                className="flex-1 rounded-lg border border-line px-4 py-2 text-sm text-mist transition-colors hover:bg-white/5 hover:text-foam disabled:opacity-50"
+                className="flex-1 border-2 border-line bg-tide px-4 py-2 text-sm font-bold text-foam transition-colors hover:bg-abyss disabled:opacity-50"
               >
                 Batal
               </button>
@@ -272,7 +269,7 @@ function Dashboard() {
                 type="button"
                 onClick={() => toDelete.id && del.mutate(toDelete.id)}
                 disabled={del.isPending}
-                className="flex-1 rounded-lg bg-red-500/90 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-500 disabled:opacity-50"
+                className="flex-1 border-2 border-line bg-red-400 px-4 py-2 text-sm font-bold text-foam shadow-brutal brutal-press disabled:opacity-50"
               >
                 {del.isPending ? 'Menghapus…' : 'Hapus'}
               </button>

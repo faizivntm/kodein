@@ -9,7 +9,7 @@ export function NavLink({ className, ...props }: ComponentProps<typeof Link>) {
     <Link
       {...props}
       className={cn(
-        'text-slate-300 hover:text-cyan-400 [&.active]:font-semibold [&.active]:text-cyan-400',
+        'font-bold text-foam underline-offset-4 hover:underline [&.active]:underline [&.active]:decoration-surf-deep [&.active]:decoration-4',
         typeof className === 'string' ? className : undefined,
       )}
     />

@@ -12,7 +12,7 @@ import { updateMaterial } from '@/api/materials/updateMaterial'
 import type { Block, Material } from '@/content/materials'
 
 const field =
-  'w-full rounded-lg border border-line bg-abyss/50 px-3 py-2 text-sm text-foam placeholder:text-mist outline-none transition-colors focus:border-surf/60'
+  'w-full border-2 border-line bg-abyss px-3 py-2 text-sm text-foam placeholder:text-mist outline-none focus:bg-surf/20'
 
 const slugify = (s: string) =>
   s.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
@@ -116,11 +116,11 @@ export function MaterialForm({ initial }: { initial?: Material }) {
       <AdminTopbar />
 
       {/* Toolbar editor (sticky di bawah topbar) */}
-      <div className="sticky top-16 z-40 border-b border-line bg-abyss/80 backdrop-blur">
+      <div className="sticky top-16 z-40 border-b-2 border-line bg-deep">
         <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-4 px-6 py-3">
           <Link
             to="/admin/create_materi"
-            className="inline-flex items-center gap-1.5 text-sm text-mist hover:text-surf"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-mist underline-offset-4 hover:text-foam hover:underline"
           >
             <FaArrowLeft className="h-3 w-3" /> Dashboard
           </Link>
@@ -151,13 +151,13 @@ export function MaterialForm({ initial }: { initial?: Material }) {
           <article>
             <div className="flex items-center gap-3 text-xs text-mist">
               {category && (
-                <span className="rounded-full bg-surf/10 px-2.5 py-1 font-medium text-surf">
+                <span className="border-2 border-line bg-surf px-2.5 py-1 font-bold text-foam">
                   {category}
                 </span>
               )}
               <span>{date}</span>
             </div>
-            <h1 className="mt-3 break-words text-4xl font-bold tracking-tight text-foam">
+            <h1 className="mt-3 break-words font-display text-4xl font-bold tracking-tight text-foam">
               {title || 'Judul materi'}
             </h1>
             {summary && <p className="mt-3 break-words text-lg text-mist">{summary}</p>}
@@ -192,7 +192,7 @@ export function MaterialForm({ initial }: { initial?: Material }) {
               className="mt-2 text-xl text-mist"
             />
 
-            <hr className="my-6 border-line" />
+            <hr className="my-6 border-t-2 border-line" />
 
             <RichEditor key={editorKey} value={html} onChange={setHtml} />
           </div>
@@ -201,17 +201,17 @@ export function MaterialForm({ initial }: { initial?: Material }) {
 
       {/* ── Dialog Terbitkan (metadata) ── */}
       {publishOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-abyss/70 p-6 backdrop-blur-sm">
-          <div className="w-full max-w-lg rounded-2xl border border-line bg-deep p-6 shadow-xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-line/40 p-6">
+          <div className="w-full max-w-lg border-2 border-line bg-tide p-6 shadow-brutal-lg">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-foam">
+              <h3 className="font-display text-lg font-bold text-foam">
                 {isEdit ? 'Simpan perubahan' : 'Terbitkan materi'}
               </h3>
               <button
                 type="button"
                 onClick={() => setPublishOpen(false)}
                 aria-label="Tutup"
-                className="rounded p-1.5 text-mist hover:bg-white/5 hover:text-foam"
+                className="border-2 border-line p-1.5 text-foam hover:bg-surf"
               >
                 <FaXmark className="h-4 w-4" />
               </button>
@@ -265,7 +265,7 @@ export function MaterialForm({ initial }: { initial?: Material }) {
             </div>
 
             {save.isError && (
-              <p className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+              <p className="mt-4 border-2 border-line bg-red-100 px-3 py-2 text-sm font-medium text-red-700">
                 {save.error.message}
               </p>
             )}
@@ -295,22 +295,22 @@ export function MaterialForm({ initial }: { initial?: Material }) {
 
       {/* Overlay loading */}
       {save.isPending && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-abyss/70 backdrop-blur-sm">
-          <div className="flex flex-col items-center gap-3">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-surf border-t-transparent" />
-            <p className="text-sm text-mist">Menyimpan materi…</p>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-line/40">
+          <div className="flex flex-col items-center gap-3 border-2 border-line bg-tide px-8 py-6 shadow-brutal-lg">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-line border-t-transparent" />
+            <p className="text-sm font-medium text-foam">Menyimpan materi…</p>
           </div>
         </div>
       )}
 
       {/* Modal sukses */}
       {save.isSuccess && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-abyss/70 p-6 backdrop-blur-sm">
-          <div className="w-full max-w-sm rounded-2xl border border-line bg-deep p-6 text-center shadow-xl">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-500/15 text-green-400">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-line/40 p-6">
+          <div className="w-full max-w-sm border-2 border-line bg-tide p-6 text-center shadow-brutal-lg">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center border-2 border-line bg-green-400 text-foam">
               <FaCheck className="h-5 w-5" />
             </div>
-            <h3 className="mt-4 text-lg font-semibold text-foam">
+            <h3 className="mt-4 font-display text-lg font-bold text-foam">
               {isEdit ? 'Perubahan tersimpan!' : 'Materi tersimpan!'}
             </h3>
             <p className="mt-1 break-words text-sm text-mist">

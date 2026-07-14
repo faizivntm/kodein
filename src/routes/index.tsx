@@ -1,6 +1,5 @@
-import { useMemo } from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { FaJava, FaPython, FaReact, FaJs } from 'react-icons/fa'
+import { FaJava, FaPython, FaReact, FaJs, FaArrowRight } from 'react-icons/fa'
 import { SiTypescript, SiTailwindcss } from 'react-icons/si'
 import { Button } from '@/components/atoms/Button'
 import { KodeinLogo } from '@/components/atoms/KodeinLogo'
@@ -9,6 +8,7 @@ import { MaterialCard, MaterialCardSkeleton } from '@/components/molecules/Mater
 import { ProjectCard } from '@/components/molecules/ProjectCard'
 import { useMaterials } from '@/api/materials/useMaterials'
 import { featuredProjects } from '@/content/projects'
+import { paths } from '@/content/paths'
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -26,36 +26,32 @@ export const Route = createFileRoute('/')({
   component: Index,
 })
 
-// Gelembung tech stack yang mengorbit si anak. pos: posisi absolut, delay: stagger animasi.
+// Tech stack yang ditampilkan sebagai sel-sel bertepi di hero.
 const stack = [
-  { Icon: FaJava, color: '#e76f00', label: 'Java', pos: 'left-[8%] top-[46%]', size: 'h-11 w-11', delay: '0s' },
-  { Icon: FaPython, color: '#3776ab', label: 'Python', pos: 'left-[30%] top-[8%]', size: 'h-14 w-14', delay: '.6s' },
-  { Icon: SiTypescript, color: '#3178c6', label: 'TypeScript', pos: 'left-[58%] top-[2%]', size: 'h-12 w-12', delay: '1.2s' },
-  { Icon: FaJs, color: '#f7df1e', label: 'JavaScript', pos: 'right-[6%] top-[24%]', size: 'h-12 w-12', delay: '.3s' },
-  { Icon: FaReact, color: '#61dafb', label: 'React', pos: 'left-[46%] top-[30%]', size: 'h-10 w-10', delay: '1.5s' },
-  { Icon: SiTailwindcss, color: '#38bdf8', label: 'Tailwind', pos: 'right-[20%] top-[50%]', size: 'h-10 w-10', delay: '.9s' },
+  { Icon: FaJava, color: '#e76f00', label: 'Java' },
+  { Icon: FaPython, color: '#3776ab', label: 'Python' },
+  { Icon: SiTypescript, color: '#3178c6', label: 'TypeScript' },
+  { Icon: FaJs, color: '#f7df1e', label: 'JavaScript' },
+  { Icon: FaReact, color: '#61dafb', label: 'React' },
+  { Icon: SiTailwindcss, color: '#38bdf8', label: 'Tailwind' },
 ]
 
 function Index() {
   const { data, isLoading } = useMaterials()
   const latest = (data ?? []).slice(0, 4)
-  const topics = useMemo(() => {
-    const count = new Map<string, number>()
-    for (const m of data ?? []) count.set(m.category, (count.get(m.category) ?? 0) + 1)
-    return [...count.entries()].map(([name, total]) => ({ name, total }))
-  }, [data])
   const works = featuredProjects().slice(0, 3)
 
   return (
     <div className="mx-auto w-full max-w-6xl px-6">
       {/* Hero */}
-      <section className="grid items-center gap-10 py-20 lg:grid-cols-2">
+      <section className="grid items-center gap-10 py-16 lg:grid-cols-2 lg:py-24">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-surf">
-            Software Engineer
-          </p>
-          <h1 className="mt-2 text-5xl font-bold tracking-tight sm:text-6xl">
-            ko<span className="text-surf">Dein</span>.
+          <span className="inline-block border-2 border-line bg-surf px-3 py-1 text-xs font-bold uppercase tracking-wide text-foam">
+            Software Engineer · Catatan & Karya
+          </span>
+          <h1 className="mt-4 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
+            Belajar ngoding, <br />
+            <span className="bg-surf px-2">tanpa basa-basi.</span>
           </h1>
           <p className="mt-5 max-w-xl text-lg text-mist">
             Dokumentasi belajar &amp; coding gue — tempat gue nyatet dan berbagi hal
@@ -71,59 +67,53 @@ function Index() {
           </div>
         </div>
 
-        {/* Art: si anak dikelilingi orbit tech stack */}
-        <div className="relative mx-auto h-72 w-full max-w-sm sm:h-80">
-          {/* Harapan yang berterbangan */}
-          {[
-            { pos: 'left-[15%] bottom-[12%]', delay: '0s' },
-            { pos: 'left-[72%] bottom-[22%]', delay: '1.6s' },
-            { pos: 'left-[42%] bottom-[6%]', delay: '3.1s' },
-            { pos: 'left-[86%] bottom-[38%]', delay: '2.3s' },
-            { pos: 'left-[26%] bottom-[32%]', delay: '4.2s' },
-          ].map((s, i) => (
-            <span
-              key={i}
-              style={{ animationDelay: s.delay }}
-              className={`animate-drift pointer-events-none absolute ${s.pos} h-1.5 w-1.5 rounded-full bg-sun shadow-[0_0_8px_2px_rgba(245,158,11,0.6)]`}
-            />
-          ))}
-          {stack.map((t) => (
-            <div
-              key={t.label}
-              title={t.label}
-              style={{ animationDelay: t.delay }}
-              className={`animate-bob absolute ${t.pos} ${t.size} grid place-items-center rounded-full border border-line bg-tide/80 shadow-lg backdrop-blur`}
-            >
-              <t.Icon className="h-1/2 w-1/2" style={{ color: t.color }} />
-            </div>
-          ))}
-          <KodeinLogo full className="absolute bottom-0 left-1/2 h-70 w-auto -translate-x-1/2 drop-shadow-[0_0_30px_rgba(34,211,238,0.35)]" />
+        {/* Mascot + grid tech stack (brutalist) */}
+        <div className="flex flex-col gap-4">
+          <div className="brutal grid place-items-center bg-abyss p-6">
+            <KodeinLogo full className="h-56 w-auto sm:h-64" />
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {stack.map((t) => (
+              <div
+                key={t.label}
+                title={t.label}
+                className="brutal flex items-center justify-center gap-2 px-2 py-3"
+              >
+                <t.Icon className="h-6 w-6" style={{ color: t.color }} />
+                <span className="hidden text-xs font-bold sm:inline">{t.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Explore: kategori */}
+      {/* Jalur Belajar */}
       <section className="py-10">
         <SectionHeading
-          title="Mau mulai dari mana?"
-          subtitle="Satu materi hari ini lebih baik daripada seratus rencana yang nggak pernah dimulai."
+          title="Jalur Belajar"
+          subtitle="Bingung mulai dari mana? Ikutin jalur ini biar terarah, bukan loncat-loncat."
         />
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {isLoading
-            ? Array.from({ length: 4 }).map((_, i) => (
-                <MaterialCardSkeleton key={i} />
-              ))
-            :topics.map((t) => (
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {paths.map((p, i) => (
             <Link
-              key={t.name}
+              key={p.category}
               to="/materials"
-              search={{ category: t.name }}
-              className="rounded-xl border border-line bg-tide/60 p-6 transition-colors hover:border-surf/50 hover:bg-tide"
+              search={{ category: p.category }}
+              className="brutal brutal-press group flex flex-col p-6"
             >
-              <div className='flex flex-row justify-center items-center gap-3'>
-              <h3 className="font-semibold text-foam">{t.name}</h3>
-              <p className="mt-1 text-sm text-mist">{t.total} materi</p>
+              <div className="flex items-center justify-between">
+                <span className="font-display text-3xl font-bold text-line/30">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="border-2 border-line bg-abyss px-2 py-0.5 text-xs font-bold">
+                  {p.level}
+                </span>
               </div>
-            
+              <h3 className="mt-3 font-display text-xl font-bold text-foam">{p.title}</h3>
+              <p className="mt-1 text-sm text-mist">{p.description}</p>
+              <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-foam">
+                Mulai jalur <FaArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+              </span>
             </Link>
           ))}
         </div>
@@ -137,9 +127,7 @@ function Index() {
         />
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {isLoading
-            ? Array.from({ length: 4 }).map((_, i) => (
-                <MaterialCardSkeleton key={i} />
-              ))
+            ? Array.from({ length: 4 }).map((_, i) => <MaterialCardSkeleton key={i} />)
             : latest.map((m) => <MaterialCard key={m.slug} material={m} />)}
         </div>
       </section>
@@ -154,7 +142,7 @@ function Index() {
             />
             <Link
               to="/projects"
-              className="shrink-0 text-sm font-medium text-surf hover:underline"
+              className="shrink-0 text-sm font-bold text-foam underline-offset-4 hover:underline"
             >
               Lihat semua →
             </Link>

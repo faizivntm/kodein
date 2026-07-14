@@ -27,14 +27,14 @@ function Login() {
     })
 
     const inputClass =
-        "w-full rounded-lg border border-line bg-abyss/50 px-3 py-2.5 text-sm text-foam placeholder:text-mist outline-none transition-colors focus:border-surf/60"
+        "w-full border-2 border-line bg-abyss px-3 py-2.5 text-sm text-foam placeholder:text-mist outline-none focus:bg-surf/20"
 
     return (
         <div className="mx-auto flex min-h-[70vh] w-full max-w-md items-center px-6 pt-20">
-            <div className="w-full rounded-2xl border border-line bg-tide/60 p-8 shadow-lg">
+            <div className="w-full border-2 border-line bg-tide p-8 shadow-brutal-lg">
                 <div className="flex flex-col items-center gap-2 text-center">
                     <KodeinLogo className="h-12 w-auto" />
-                    <h1 className="text-2xl font-bold text-foam">Masuk ke koDein</h1>
+                    <h1 className="font-display text-2xl font-bold text-foam">Masuk ke koDein</h1>
                     <p className="text-sm text-mist">Login admin untuk mengelola materi.</p>
                 </div>
 
@@ -88,7 +88,7 @@ function Login() {
                     </div>
 
                     {loginMutate.isError && (
-                        <p className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+                        <p className="border-2 border-line bg-red-100 px-3 py-2 text-sm font-medium text-red-700">
                             {loginMutate.error?.message || 'Login gagal. Coba lagi.'}
                         </p>
                     )}

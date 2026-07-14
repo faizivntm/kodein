@@ -9,7 +9,7 @@ export function ContentBlocks({ blocks }: { blocks: Block[] }) {
         switch (block.type) {
           case 'heading':
             return (
-              <h2 key={i} className="break-words text-xl font-bold text-foam">
+              <h2 key={i} className="break-words font-display text-2xl font-bold text-foam">
                 {block.text}
               </h2>
             )
@@ -21,7 +21,7 @@ export function ContentBlocks({ blocks }: { blocks: Block[] }) {
             )
           case 'list':
             return (
-              <ul key={i} className="list-disc space-y-1 break-words pl-6 text-mist marker:text-surf">
+              <ul key={i} className="list-disc space-y-1 break-words pl-6 text-mist marker:text-line">
                 {block.items.map((item, j) => (
                   <li key={j}>{item}</li>
                 ))}
@@ -31,7 +31,7 @@ export function ContentBlocks({ blocks }: { blocks: Block[] }) {
             return (
               <pre
                 key={i}
-                className="overflow-x-auto rounded-lg border border-line bg-abyss p-4 text-sm text-foam"
+                className="overflow-x-auto border-2 border-line bg-[#12100e] p-4 text-sm text-[#f5e6c8] shadow-brutal"
               >
                 <code>{block.code}</code>
               </pre>

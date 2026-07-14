@@ -38,7 +38,7 @@ function EditMaterial() {
           </p>
           <Link
             to="/admin/create_materi"
-            className="mt-4 inline-block text-sm text-surf hover:underline"
+            className="mt-4 inline-block text-sm font-bold text-foam underline-offset-4 hover:underline"
           >
             ← Dashboard
           </Link>

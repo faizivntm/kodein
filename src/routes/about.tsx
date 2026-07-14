@@ -64,12 +64,14 @@ function About() {
             gue nyatet biar nggak lupa. Ternyata nyatet itu cara belajar paling jujur —
             jadi gue rapihin, publikasikan, siapa tahu berguna buat yang lain juga.
           </p>
-          <p className="font-semibold text-surf">
-            Pelan-pelan aja, kalau buru-buru bisa kecelakaan.
+          <p>
+            <span className="inline-block bg-surf px-2 py-1 font-bold text-foam">
+              Pelan-pelan aja, kalau buru-buru bisa kecelakaan.
+            </span>
           </p>
         </div>
 
-        <KodeinLogo cry className="order-first mx-auto h-100 w-auto drop-shadow-[0_0_30px_rgba(34,211,238,0.3)] sm:h-72 lg:order-last"
+        <KodeinLogo cry className="order-first mx-auto h-100 w-auto sm:h-72 lg:order-last"
         />
       </div>
 
@@ -78,9 +80,9 @@ function About() {
         {highlights.map((h) => (
           <div
             key={h.value}
-            className="flex items-center gap-3 rounded-2xl border border-line bg-tide/50 p-4"
+            className="brutal flex items-center gap-3 p-4"
           >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surf/10 text-surf">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center border-2 border-line bg-surf text-foam">
               <h.Icon className="h-5 w-5" />
             </div>
             <div className="min-w-0">
@@ -92,19 +94,19 @@ function About() {
       </div>
 
       {/* Pengalaman (timeline) */}
-      <h2 className="mt-14 text-xl font-bold text-foam">Pengalaman</h2>
-      <ol className="mt-6 space-y-8 border-l border-line pl-6">
+      <h2 className="mt-14 text-2xl font-bold text-foam">Pengalaman</h2>
+      <ol className="mt-6 space-y-8 border-l-2 border-line pl-6">
         {experience.map((e) => (
           <li key={`${e.org}-${e.period}`} className="relative">
-            <span className="absolute -left-[1.6rem] top-1.5 h-3 w-3 rounded-full border-2 border-surf bg-abyss" />
+            <span className="absolute left-[-1.6rem] top-1.5 h-3 w-3 border-2 border-line bg-surf" />
             <p className="text-xs text-mist">{e.period}</p>
             <h3 className="mt-0.5 font-semibold text-foam">
-              {e.role} <span className="text-surf">· {e.org}</span>
+              {e.role} <span className="font-bold text-mist">· {e.org}</span>
             </h3>
             <ul className="mt-2 space-y-1.5">
               {e.highlights.map((h) => (
                 <li key={h} className="flex gap-2 text-sm text-mist">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-surf" />
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-line" />
                   <span>{h}</span>
                 </li>
               ))}
@@ -116,12 +118,12 @@ function About() {
       {/* Pendidikan & sertifikasi */}
       <div className="mt-14 grid gap-8 sm:grid-cols-2">
         <div>
-          <h2 className="text-xl font-bold text-foam">Sertifikasi</h2>
+          <h2 className="text-2xl font-bold text-foam">Sertifikasi</h2>
           <ul className="mt-4 space-y-2">
             {certifications.map((c) => (
               <li
                 key={c}
-                className="flex items-start gap-2 rounded-xl border border-line bg-tide/50 px-4 py-3 text-sm text-mist"
+                className="flex items-start gap-2 border-2 border-line bg-tide px-4 py-3 text-sm text-mist"
               >
                 <FaAward className="mt-0.5 h-4 w-4 shrink-0 text-sun" />
                 <span>{c}</span>
@@ -132,15 +134,15 @@ function About() {
       </div>
 
       {/* Kontak / CTA */}
-      <div className="mt-14 rounded-2xl border border-line bg-tide/50 p-8 text-center">
-        <h2 className="text-xl font-bold text-foam">Tertarik kerja bareng?</h2>
-        <p className="mx-auto mt-2 max-w-md text-sm text-mist">
+      <div className="mt-14 border-2 border-line bg-surf p-8 text-center shadow-brutal-lg">
+        <h2 className="text-2xl font-bold text-foam">Tertarik kerja bareng?</h2>
+        <p className="mx-auto mt-2 max-w-md text-sm font-medium text-foam">
           Terbuka untuk peluang full-time maupun freelance. Langsung sapa gue lewat email
           atau sosial media di bawah.
         </p>
         <a
           href="mailto:faizivantama01@gmail.com"
-          className="mt-6 inline-flex items-center gap-2 rounded-lg bg-surf px-5 py-2.5 text-sm font-semibold text-abyss transition-colors hover:bg-surf-deep hover:text-foam"
+          className="mt-6 inline-flex items-center gap-2 border-2 border-line bg-tide px-5 py-2.5 text-sm font-bold text-foam shadow-brutal brutal-press"
         >
           <FaEnvelope className="h-4 w-4" /> Hire Me
         </a>
@@ -151,7 +153,7 @@ function About() {
               href={c.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-line px-4 py-2 text-sm text-mist transition-colors hover:border-surf/50 hover:text-foam"
+              className="inline-flex items-center gap-2 border-2 border-line bg-tide px-4 py-2 text-sm font-bold text-foam transition-transform hover:translate-x-[2px] hover:translate-y-[2px]"
             >
               <c.Icon className="h-4 w-4" /> {c.label}
             </a>

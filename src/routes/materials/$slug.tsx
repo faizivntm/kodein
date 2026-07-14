@@ -34,12 +34,12 @@ function MaterialDetail() {
     <button
       type="button"
       onClick={() => router.history.back()}
-      className="text-sm text-surf hover:underline"
+      className="text-sm font-bold text-foam underline-offset-4 hover:underline"
     >
       ← Back
     </button>
   ) : (
-    <Link to="/materials" className="text-sm text-surf hover:underline">
+    <Link to="/materials" className="text-sm font-bold text-foam underline-offset-4 hover:underline">
       ← Semua materi
     </Link>
   )
@@ -63,14 +63,14 @@ function MaterialDetail() {
         <article className="mx-auto w-full max-w-3xl px-6 py-16">
           {back}
 
-          <header className="mt-6 border-b border-line pb-6">
+          <header className="mt-6 border-b-2 border-line pb-6">
             <div className="flex items-center gap-3 text-xs text-mist">
-              <span className="rounded-full bg-surf/10 px-2.5 py-1 font-medium text-surf">
+              <span className="border-2 border-line bg-surf px-2.5 py-1 font-bold text-foam">
                 {material.category}
               </span>
               <time dateTime={material.date}>{formatDate(material.date)}</time>
             </div>
-            <h1 className="mt-4 break-words text-3xl font-bold tracking-tight text-foam">
+            <h1 className="mt-4 break-words font-display text-4xl font-bold tracking-tight text-foam">
               {material.title}
             </h1>
             <p className="mt-2 break-words text-lg text-mist">{material.summary}</p>

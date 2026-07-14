@@ -74,7 +74,7 @@ function Materials() {
         {admin && (
           <Link
             to="/admin/create_materi"
-            className="mb-4 inline-flex items-center gap-1.5 text-sm text-mist hover:text-surf"
+            className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-mist underline-offset-4 hover:text-foam hover:underline"
           >
             <FaArrowLeft className="h-3 w-3" /> Dashboard
           </Link>
@@ -93,7 +93,7 @@ function Materials() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Cari judul, isi, kategori, atau tag…"
-        className="mt-8 w-full max-w-md rounded-xl border border-line bg-tide/60 px-4 py-2.5 text-foam placeholder:text-mist outline-none transition-colors focus:border-surf/50"
+        className="mt-8 w-full max-w-md border-2 border-line bg-tide px-4 py-2.5 text-foam shadow-brutal outline-none placeholder:text-mist focus:bg-surf/20"
       />
 
       {isLoading ? (
@@ -103,7 +103,7 @@ function Materials() {
           ))}
         </div>
       ) : isError ? (
-        <p className="mt-10 text-red-300">
+        <p className="mt-10 font-medium text-red-600">
           Waduh, materinya gagal dimuat. Cek koneksi atau coba lagi sebentar ya.
         </p>
       ) : items.length === 0 ? (

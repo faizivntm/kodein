@@ -34,36 +34,36 @@ export function MaterialCard({
   }
 
   return (
-    <div className="group relative flex flex-col rounded-xl border border-line bg-tide/60 p-5 transition-colors hover:border-surf/50 hover:bg-tide">
+    <div className="group brutal brutal-press relative flex flex-col p-5">
       <Link
         to="/materials/$slug"
         params={{ slug: material.slug }}
         search={admin ? { admin: true } : {}}
         aria-label={material.title}
-        className="absolute inset-0 rounded-xl"
+        className="absolute inset-0"
       />
 
       <div className="flex items-center justify-between text-xs text-mist">
-        <span className="rounded-full bg-surf/10 px-2.5 py-1 font-medium text-surf">
+        <span className="border-2 border-line bg-surf px-2.5 py-1 font-bold text-foam">
           {material.category}
         </span>
         <time dateTime={material.date}>{formatDate(material.date)}</time>
       </div>
 
-      <h3 className="mt-3 text-lg font-semibold text-foam group-hover:text-surf">
+      <h3 className="mt-3 font-display text-lg font-bold text-foam underline-offset-2 group-hover:underline">
         {material.title}
       </h3>
       <p className="mt-1 line-clamp-3 text-sm text-mist">{material.summary}</p>
 
       <div className="mt-4 flex items-center justify-between">
-        <span className="text-sm font-medium text-surf">Read →</span>
+        <span className="text-sm font-bold text-foam">Baca →</span>
         {admin && (
           <div className='flex flex-row gap-2'>
             <Link
               to="/admin/materials/$id"
               params={{ id: String(material.id) }}
               aria-label={`Edit ${material.title}`}
-              className="relative z-10 inline-flex items-center gap-1.5 rounded-lg border border-line px-2.5 py-1 text-xs text-mist transition-colors hover:border-surf/50 hover:text-foam"
+              className="relative z-10 inline-flex items-center gap-1.5 border-2 border-line bg-tide px-2.5 py-1 text-xs font-bold text-foam transition-colors hover:bg-surf"
             >
               <FaPenToSquare className="h-3 w-3" /> Edit
             </Link>
@@ -73,7 +73,7 @@ export function MaterialCard({
               type="button"
               aria-label="Hapus materi"
               title="Hapus"
-              className="relative z-10 inline-flex items-center gap-1.5 rounded-lg border border-line px-2.5 py-1 text-xs text-mist transition-colors hover:border-surf/50 hover:text-foam"
+              className="relative z-10 inline-flex items-center gap-1.5 border-2 border-line bg-tide px-2.5 py-1 text-xs font-bold text-foam transition-colors hover:bg-red-400"
               onClick={() => askDelete(material)}
               >
               <FaTrash className="h-3.5 w-3.5" /> Delete
@@ -85,12 +85,12 @@ export function MaterialCard({
 
       {/* Dialog konfirmasi hapus */}
       {toDelete && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-abyss/70 p-6 backdrop-blur-sm">
-          <div className="w-full max-w-sm rounded-2xl border border-line bg-deep p-6 shadow-xl">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-500/15 text-red-400">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-line/40 p-6">
+          <div className="w-full max-w-sm border-2 border-line bg-tide p-6 shadow-brutal-lg">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center border-2 border-line bg-red-400 text-foam">
               <FaTrash className="h-5 w-5" />
             </div>
-            <h3 className="mt-4 text-center text-lg font-semibold text-foam">
+            <h3 className="mt-4 text-center font-display text-lg font-bold text-foam">
               Hapus materi?
             </h3>
             <p className="mt-1 break-words text-center text-sm text-mist">
@@ -98,7 +98,7 @@ export function MaterialCard({
             </p>
 
             {del.isError && (
-              <p className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+              <p className="mt-4 border-2 border-line bg-red-100 px-3 py-2 text-sm font-medium text-red-700">
                 {del.error.message}
               </p>
             )}
@@ -108,7 +108,7 @@ export function MaterialCard({
                 type="button"
                 onClick={() => setToDelete(null)}
                 disabled={del.isPending}
-                className="flex-1 rounded-lg border border-line px-4 py-2 text-sm text-mist transition-colors hover:bg-white/5 hover:text-foam disabled:opacity-50"
+                className="flex-1 border-2 border-line bg-tide px-4 py-2 text-sm font-bold text-foam transition-colors hover:bg-abyss disabled:opacity-50"
               >
                 Batal
               </button>
@@ -116,7 +116,7 @@ export function MaterialCard({
                 type="button"
                 onClick={() => toDelete.id && del.mutate(toDelete.id)}
                 disabled={del.isPending}
-                className="flex-1 rounded-lg bg-red-500/90 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-500 disabled:opacity-50"
+                className="flex-1 border-2 border-line bg-red-400 px-4 py-2 text-sm font-bold text-foam shadow-brutal brutal-press disabled:opacity-50"
               >
                 {del.isPending ? 'Menghapus…' : 'Hapus'}
               </button>

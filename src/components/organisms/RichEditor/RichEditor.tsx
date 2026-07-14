@@ -55,7 +55,7 @@ export function RichEditor({
 function Toolbar({ editor }: { editor: Editor }) {
   const chain = () => editor.chain().focus()
   return (
-    <div className="sticky top-[6.5rem] z-30 mb-4 flex flex-wrap items-center gap-0.5 rounded-xl border border-line bg-deep/90 p-1 backdrop-blur">
+    <div className="sticky top-[6.5rem] z-30 mb-4 flex flex-wrap items-center gap-0.5 border-2 border-line bg-deep p-1 shadow-brutal">
       <Btn active={editor.isActive('bold')} onClick={() => chain().toggleBold().run()} label="Tebal">
         <FaBold className="h-3.5 w-3.5" />
       </Btn>
@@ -134,8 +134,8 @@ function Btn({
       title={label}
       aria-label={label}
       aria-pressed={active}
-      className={`grid h-8 w-8 place-items-center rounded-lg transition-colors disabled:opacity-30 ${
-        active ? 'bg-surf/15 text-surf' : 'text-mist hover:bg-white/5 hover:text-foam'
+      className={`grid h-8 w-8 place-items-center transition-colors disabled:opacity-30 ${
+        active ? 'border-2 border-line bg-surf text-foam' : 'text-mist hover:bg-surf/20 hover:text-foam'
       }`}
     >
       {children}
