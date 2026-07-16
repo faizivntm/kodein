@@ -14,6 +14,7 @@
   --color-sun: #fbbf24; /* aksen sekunder (amber) — badge */
   --color-foam: #111111; /* teks utama (tinta) */
   --color-mist: #57534e; /* teks sekunder (abu hangat) */
+  --color-ink: #111111; /* tinta tetap — tidak ikut flip; teks di atas lime */
 
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
   --font-sans: ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -21,6 +22,26 @@
   /* Shadow blok khas brutalist (offset keras, tanpa blur). */
   --shadow-brutal: 4px 4px 0 0 var(--color-line);
   --shadow-brutal-lg: 6px 6px 0 0 var(--color-line);
+}
+
+/* Dark mode: cukup override nilai token — semua komponen sudah pakai token ini
+   jadi ikut berubah tanpa edit. Lime/amber tetap (aksen), sisanya dibalik.
+   Kelas .dark dipasang di <html> oleh useTheme (lihat src/hooks/useTheme.ts). */
+html.dark {
+  --color-abyss: #101010; /* background halaman */
+  --color-deep: #1a1a1a; /* permukaan header/footer */
+  --color-tide: #202020; /* kartu */
+  --color-line: #ededed; /* border & garis jadi tinta terang */
+  --color-foam: #f5f5f5; /* teks utama terang */
+  --color-mist: #a3a3a3; /* teks sekunder */
+  /* surf, surf-deep, sun, ink sengaja tidak diubah. */
+}
+
+/* Lime pop selalu bawa teks tinta di kedua tema. Aturan unlayered ini menang
+   atas utility text-* Tailwind (yang di @layer utilities), jadi tiap elemen
+   ber-background lime otomatis pakai tinta — tanpa mengganti ~24 call-site. */
+.bg-surf {
+  color: var(--color-ink);
 }
 
 @layer base {
@@ -38,7 +59,8 @@
   }
 
   ::selection {
-    @apply bg-surf text-foam;
+    @apply bg-surf;
+    color: var(--color-ink);
   }
 }
 

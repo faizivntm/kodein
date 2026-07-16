@@ -1,13 +1,15 @@
 import { Link } from '@tanstack/react-router'
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { FaBars, FaTimes, FaMoon, FaSun } from 'react-icons/fa'
 import { NavLink } from '@/components/molecules/NavLink'
 import { KodeinLogo } from '@/components/atoms/KodeinLogo'
 import { useToggle } from '@/hooks/useToggle'
+import { useTheme } from '@/hooks/useTheme'
 
 // Organism: header sticky dengan blur di langit malam.
 // Desktop: nav inline. Mobile: nav collapse jadi menu hamburger.
 export function Header() {
   const [open, toggle] = useToggle(false)
+  const { theme, toggle: toggleTheme } = useTheme()
 
   return (
     <header className="sticky top-0 z-50 border-b-2 border-line bg-deep">
@@ -29,16 +31,28 @@ export function Header() {
           <NavLink to="/about">About</NavLink>
         </nav>
 
-        {/* Tombol hamburger (mobile) for header */}
-        <button
-          type="button"
-          onClick={toggle}
-          aria-label="Menu"
-          aria-expanded={open}
-          className="text-foam sm:hidden"
-        >
-          {open ? <FaTimes className="h-5 w-5" /> : <FaBars className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-4">
+          {/* Toggle tema */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Mode terang' : 'Mode gelap'}
+            className="text-foam hover:text-surf-deep"
+          >
+            {theme === 'dark' ? <FaSun className="h-5 w-5" /> : <FaMoon className="h-5 w-5" />}
+          </button>
+
+          {/* Tombol hamburger (mobile) for header */}
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label="Menu"
+            aria-expanded={open}
+            className="text-foam sm:hidden"
+          >
+            {open ? <FaTimes className="h-5 w-5" /> : <FaBars className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Menu dropdown (mobile) */}
